@@ -1,0 +1,86 @@
+
+
+PROCEDURE dot_product( V1 : ARRAY_OF INTEGER[t],V2 : ARRAY_OF INTEGER[t])
+VAR
+    ps,i:INTEGER
+BEGIN
+ps:=0;
+    FOR i FROM 1 TO t-1  DO
+    ps:=ps+V1[i]*V2[i];
+    END_FOR
+
+    IF (ps:=0) THEN
+    WRITE("This vectors are orthogonal")
+    ELSE                                                
+    WRITE("This vectors are NOT orthogonal")                                                                                                                       
+    END_IF
+END
+
+ALGORITHM DOT_PRODUCT 
+VAR
+    i,j,x,y:INTEGER
+    V1,V2: ARRAY_OF INTEGER[t]
+    T:ARRAY_OF INTEGER[t][t];
+    
+BEGIN
+    WRITE("Write the size of matrix");
+    READ(t);
+    FOR i FROM 1 TO t-1 DO 
+    FOR j FROM 1 TO t-1 DO 
+    READ(T[i][j]);
+    END_FOR
+    END_FOR
+    WRITE("Give me two index")
+    READ(x);
+    READ(y);
+    V1:= T(x,:);
+    V2:= T(:,y);
+    dot_product(V1, V2);
+END
+
+
+//Second instruction 
+
+FUNCTION dot_product(VAR V1 : ARRAY_OF INTEGER[t],V2 : ARRAY_OF INTEGER[t]) : INTEGER 
+VAR
+    ps,i:INTEGER
+BEGIN
+
+ps:=0;
+    FOR i FROM 1 TO t-1  DO
+    ps:=ps+V1[i]*V2[i];
+    END_FOR  
+    RETURN ps ;
+END
+
+ALGORITHM DOT_PRODUCT 
+VAR
+    i,j,n,x,y:INTEGER
+    T:ARRAY_OF INTEGER[t][t];
+    V1,V2: ARRAY_OF INTEGER[t]
+BEGIN
+
+    WRITE("Write the size of matrix");
+    READ(t);
+
+    FOR i FROM 1 TO t-1 DO 
+    FOR j FROM 1 TO t-1 DO 
+
+    READ(T[i][j]);
+
+    END_FOR
+    END_FOR
+    WRITE("Give me two index")
+    READ(x);
+
+    READ(y);
+    V1:=T(x,:);
+    V2:= T(:,y);
+
+    n:=dot_product(V1, V2);
+    IF (n:=0) THEN
+    WRITE("This vectors are orthogonal");
+    ELSE                                                
+    WRITE("This vectors are NOT orthogonal");                                                                                                                       
+    END_IF
+END
